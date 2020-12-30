@@ -37,7 +37,7 @@ namespace Aplicacao.Data.Repositories
 
         public User FindById(long id)
         {
-            User user = _context.users.Where(p => p.Id == id).FirstOrDefault();
+            User user = _context.users.Where(p => p.UserId == id).FirstOrDefault();
             _context.SaveChanges();
             return user;
         }
@@ -45,7 +45,7 @@ namespace Aplicacao.Data.Repositories
         public User EditUser(User user)
         {
             
-            User userNew = FindById(user.Id);
+            User userNew = FindById(user.UserId);
 
             if (userNew !=null)
             {
