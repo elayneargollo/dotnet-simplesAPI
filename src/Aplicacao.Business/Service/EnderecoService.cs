@@ -16,5 +16,12 @@ namespace Aplicacao.Business.Services
             Endereco endereco = _repository.FindByCEP(CEP);
             return endereco;
         }
+
+        public List<Endereco> FindAll()
+        {
+            List<Endereco> list = new List<Endereco>();
+            list = _repository.FindAll();
+            return list;
+        }
     }
 }

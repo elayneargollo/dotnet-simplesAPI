@@ -6,6 +6,6 @@ namespace Aplicacao.Business.Interfaces
     public interface IEnderecoRepository
     {
         Endereco FindByCEP(string CEP);
-     
+        List<Endereco> FindAll();
     }
 }
