@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
 
-namespace Solutis.Api.Controllers
+namespace Aplicacao.Api.Controllers
 {
     [ApiController]
     [Route("/api/user")]

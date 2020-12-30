@@ -31,6 +31,8 @@ namespace Aplicacao.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
