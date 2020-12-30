@@ -3,10 +3,36 @@
   <ItemGroup>
     <ProjectReference Include="..\Aplicacao.Core\Aplicacao.Core.csproj" />
     <ProjectReference Include="..\Aplicacao.Business\Aplicacao.Business.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.8.0" />
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <None Include="OpenAPIs\AtendeCliente.json" />
+  </ItemGroup>
+
 
 </Project>

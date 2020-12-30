@@ -18,7 +18,8 @@ namespace Aplicacao.Data.Repositories
         };
         public Endereco FindByCEP(string CEP)
         {
-            Endereco endereco = enderecos.Where(endereco => endereco.CEP == CEP).FirstOrDefault();
+           // Endereco endereco = enderecos.Where(endereco => endereco.CEP == CEP).FirstOrDefault();
+           Endereco endereco = ConsultaSoap.GetEnderecoByCep(CEP);
             return endereco;
         }
     }
