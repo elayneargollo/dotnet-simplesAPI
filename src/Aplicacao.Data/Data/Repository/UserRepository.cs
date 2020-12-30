@@ -2,51 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aplicacao.Core.Models;
+using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore;
 using Aplicacao.Business.Interfaces;
 
 namespace Aplicacao.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private static List<User> users = new List<User>()
+        private readonly Contexto _context;
+
+        public UserRepository(Contexto contexto) 
         {
-            new User() 
-                {
-                   Id=1, 
-                   Username="teste",
-                   Password = "teste",
-                   Idade = 45,
-                   Nome = "teste",
-                   Sobrenome = "teste",
-                }
-        };
+            _context = contexto;
+        }
+
         public List<User> FindAll()
         {
-            return users;
+           return _context.users.ToList();
+        }
+
+        public User CreateUser(User user) 
+        {
+            _context.users.Add(user);
+            _context.SaveChanges();
+            return user;
+        }
+
+        public void Delete(long id)
+        {
+            User user = FindById(id);
+            _context.users.Remove(user);
         }
 
         public User FindById(long id)
         {
-            User user = users.Where( u => u.Id == id).FirstOrDefault();
+            User user = _context.users.Where(p => p.Id == id).FirstOrDefault();
+            _context.SaveChanges();
             return user;
-        }
-        
-        public User CreateUser(User user) 
-        {
-            bool isExist = users.Any(userClient => userClient.Id == user.Id);
-
-            if(user!=null && !isExist)
-            {
-                users.Add(user);
-                return user;
-            }
-                return null;
         }
 
         public User EditUser(User user)
         {
             
-            User userNew = users.Where( u => u.Id == user.Id).FirstOrDefault();
+            User userNew = FindById(user.Id);
 
             if (userNew !=null)
             {
@@ -60,27 +59,5 @@ namespace Aplicacao.Data.Repositories
             return user;
         }
 
-        public void Delete(long id)
-        {
-            User user = FindById(id);
-            users.Remove(user);
-        }
-
-        public void EditPassword(long id, string password)
-        {
-           User userPassword = new User() {Id = id};
-           userPassword.Password = password;
-        }
-
-        public IEnumerable<User> PartialEditUser(string username)
-        {
-            
-            IEnumerable<User> user =
-            from userByName in users
-            where userByName.Username == username
-            select userByName;
-
-            return user;
-        }
     }
 }

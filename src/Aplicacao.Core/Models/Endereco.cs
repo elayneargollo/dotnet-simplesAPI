@@ -8,6 +8,6 @@ namespace Aplicacao.Core.Models
         public string Cidade { set; get; }
         public string End { set; get; }
         public string UF { set; get; }
-        public User user {set; get; }
+       // public User user {set; get; }
     }
 }
