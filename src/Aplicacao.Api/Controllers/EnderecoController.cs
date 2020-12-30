@@ -13,17 +13,23 @@ namespace Aplicacao.Api.Controllers
 
         public EnderecoController (IEnderecoService enderecoService) => _enderecoService = enderecoService;
 
-     /*   [HttpGet] // https://localhost:5001/api/endereco/?CEP=seuCEP
-        public IActionResult GetEnderecoByCep(string CEP)
-        {
-            return Ok(_enderecoService.GetEnderecoByCep(CEP));
-
-        }*/
-
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_enderecoService.FindAll());
         }
+
+        [HttpPost]
+        public IActionResult Post(string cep)
+        {
+            return Ok(_enderecoService.Create(cep));
+        }
+
+        [HttpGet("{cep}")]
+        public IActionResult Get([FromRoute] string cep)
+        {
+            return Ok(_enderecoService.GetEnderecoByCep(cep));
+        }
+
     }
 }
