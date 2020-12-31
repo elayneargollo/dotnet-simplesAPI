@@ -52,7 +52,10 @@ namespace Aplicacao.Api
            var configuration = new MapperConfiguration(cfg =>
             {
                cfg.CreateMap<Endereco, EnderecoDto>();
+               cfg.CreateMap<Endereco, UserEnderecoDto>();
                cfg.CreateMap<User, UserDto>();
+               cfg.CreateMap<User, UserDtoEnd>();
+
             });
 
             services.AddControllersWithViews()

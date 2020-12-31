@@ -1,3 +1,4 @@
+
 create table enderecos(
    endereco_id BIGINT NOT NULL AUTO_INCREMENT,
    userForeignKey BIGINT,
@@ -6,9 +7,10 @@ create table enderecos(
    cidade VARCHAR(20),
    end VARCHAR(100),
    uf VARCHAR(2),
-   foreign key (user_id) references users (user_id),
+   foreign key (userForeignKey) references users (user_id),
    PRIMARY KEY ( endereco_id )
 );
+
 
 CREATE TABLE `users` (
   `user_id` bigint NOT NULL AUTO_INCREMENT,

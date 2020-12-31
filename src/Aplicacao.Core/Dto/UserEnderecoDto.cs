@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Aplicacao.Core.Dto
 {
-    public class EnderecoDto
+    public class UserEnderecoDto
     {
         
         public string CEP { set; get; }
@@ -13,7 +13,7 @@ namespace Aplicacao.Core.Dto
         public string Cidade { set; get; }
         public string End { set; get; }
         public string UF { set; get; }
-     //   public UserDtoEnd User {set; get; }
+        public UserDtoEnd User {set; get; }
 
     }
 }

@@ -18,9 +18,11 @@ namespace Aplicacao.Data.Repositories
             builder.Entity<Endereco>().ToTable("enderecos");
             builder.Entity<Endereco>().HasKey(p => p.EnderecoId);
 
+            builder.Entity<Endereco>().Property<long>("UserForeignKey");
             builder.Entity<Endereco>().HasOne(p => p.User).WithMany(b => b.Enderecos).HasForeignKey(p => p.UserForeignKey);
-            
+          //  builder.Entity<Endereco>().HasOne(d => d.User).WithMany().OnDelete(DeleteBehavior.Restrict);
         }
 
     }
+
 }

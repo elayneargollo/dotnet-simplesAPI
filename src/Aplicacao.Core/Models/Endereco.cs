@@ -36,5 +36,6 @@ namespace Aplicacao.Core.Models
         public User User {set; get; }
         public long UserForeignKey  { get; set; } 
 
+
     }
 }

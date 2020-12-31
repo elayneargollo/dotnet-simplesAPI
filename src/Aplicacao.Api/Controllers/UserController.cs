@@ -22,14 +22,14 @@ namespace Aplicacao.Api.Controllers
            _mapper = mapper;
         }
 
-         /*
+         
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_userService.FindAll());
 
         }
-        */
+        
 
         /*   
         [HttpPost]

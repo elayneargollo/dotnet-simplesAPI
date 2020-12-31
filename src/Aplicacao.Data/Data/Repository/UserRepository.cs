@@ -19,8 +19,8 @@ namespace Aplicacao.Data.Repositories
 
         public List<User> FindAll()
         {
-            // return _context.users.ToList();
-            return _context.users.Include(end => end.Enderecos).ToList();
+             return _context.users.ToList();
+        //    return _context.users.Include(end => end.Enderecos).ToList();
         }
 
         public User CreateUser(User user) 
