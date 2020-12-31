@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,10 +13,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
+using System.Reflection;
+using System.IO;
 using Aplicacao.Business.Interfaces;
 using Aplicacao.Business.Services;
 using Aplicacao.Data.Repositories;
+using Aplicacao.Core.Dto;
+using Aplicacao.Core.Models;
 
 namespace Aplicacao.Api
 {
@@ -45,6 +48,20 @@ namespace Aplicacao.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aplicacao.Api", Version = "v1" });
             });
+
+           var configuration = new MapperConfiguration(cfg =>
+            {
+               cfg.CreateMap<Endereco, EnderecoDto>();
+               cfg.CreateMap<User, UserDto>();
+            });
+
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
+            var mapper = configuration.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

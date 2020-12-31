@@ -19,7 +19,8 @@ namespace Aplicacao.Data.Repositories
 
         public List<User> FindAll()
         {
-           return _context.users.ToList();
+            // return _context.users.ToList();
+            return _context.users.Include(end => end.Enderecos).ToList();
         }
 
         public User CreateUser(User user) 
@@ -37,8 +38,11 @@ namespace Aplicacao.Data.Repositories
 
         public User FindById(long id)
         {
-            User user = _context.users.Where(p => p.UserId == id).FirstOrDefault();
-            _context.SaveChanges();
+            User user = _context.users
+            .Where(p => p.UserId == id)
+            .Include(end => end.Enderecos)
+            .FirstOrDefault();
+            
             return user;
         }
 

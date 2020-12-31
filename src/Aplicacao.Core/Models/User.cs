@@ -10,26 +10,32 @@ namespace Aplicacao.Core.Models
     {
         [Column("user_id")]
         public long UserId {get; set; }
-        [Column("user_name")]
-        public string Username { get; set; }
-        [Column("password")]
-        public string Password { get; set; }
-        [Column("idade")]
-        public int Idade { get; set; }
-        [Column("nome")]
-        public string Nome { get; set; }
-        [Column("sobrenome")]
-        public string Sobrenome { get; set; }
-        [NotMapped]
-        public virtual ICollection<Endereco> Enderecos { get; set; }
 
-        public User(string Username, string Password, int Idade, string Nome, string Sobrenome)
+        [Column("user_name")]
+        [Display (Name = "Username")]
+        public string Username { get; set; }
+
+        [Column("password")]
+        [Display (Name = "Password")]
+        public string Password { get; set; }
+
+        [Column("idade")]
+        [Display (Name = "Idade")]
+        public int Idade { get; set; }
+
+        [Column("nome")]
+        [Display (Name = "Nome")]
+        public string Nome { get; set; }
+
+        [Column("sobrenome")]
+        [Display (Name = "Sobrenome")]
+        public string Sobrenome { get; set; }
+
+        public ICollection<Endereco> Enderecos { get; set; }
+
+        public User()
         {
-            this.Username = Username;
-            this.Password = Password;
-            this.Idade = Idade;
-            this.Nome = Nome;
-            this.Sobrenome = Sobrenome;
+            Enderecos = new HashSet<Endereco>();
         }
 
     }

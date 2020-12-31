@@ -32,8 +32,13 @@ namespace Aplicacao.Data.Repositories
         public Endereco Create(string cep) 
         {
             Endereco newEndereco = ConsultaSoap.GetEnderecoByCep(cep);
+            newEndereco.UserForeignKey = 1;
+
+            newEndereco.User = _context.users.Where(u => u.UserId == newEndereco.UserForeignKey).FirstOrDefault();
+
             _context.enderecos.Add(newEndereco);
             _context.SaveChanges();
+
             return newEndereco;
         }
 

@@ -12,5 +12,15 @@ namespace Aplicacao.Data.Repositories
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Endereco>().ToTable("enderecos");
+            builder.Entity<Endereco>().HasKey(p => p.EnderecoId);
+
+            builder.Entity<Endereco>().HasOne(p => p.User).WithMany(b => b.Enderecos).HasForeignKey(p => p.UserForeignKey);
+            
+        }
+
     }
 }

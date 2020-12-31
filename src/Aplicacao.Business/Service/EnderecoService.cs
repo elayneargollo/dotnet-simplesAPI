@@ -24,7 +24,7 @@ namespace Aplicacao.Business.Services
             return list;
         }
 
-        public Endereco Create(string cep)
+        public Endereco Create(string cep )
         {
             Endereco newEndereco = _repository.Create(cep);
             return newEndereco;
