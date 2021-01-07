@@ -5,6 +5,7 @@ using Aplicacao.Core.Models;
 using MySql.Data.MySqlClient;
 using Microsoft.EntityFrameworkCore;
 using Aplicacao.Business.Interfaces;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Data.Repositories
 {
@@ -17,18 +18,29 @@ namespace Aplicacao.Data.Repositories
             _context = contexto;
         }
 
+        public async Task<User> CreateUserAsync(User user) 
+        {
+          
+            _context.users.Add(user);
+            _context.SaveChanges();
+
+            return  await Task.Run(() => FindById(user.UserId));;
+        }
+
+        public async Task<User> FindByIdAsync(long id)
+        {
+            return await Task.Run(() => _context.users
+            .Where(p => p.UserId == id)
+            .Include(end => end.Enderecos)
+            .FirstOrDefault());;
+        }
+
+
         public List<User> FindAll()
         {
              return _context.users.ToList();
         }
-
-        public User CreateUser(User user) 
-        {
-            _context.users.Add(user);
-            _context.SaveChanges();
-            return user;
-        }
-
+     
         public void Delete(long id)
         {
             User user = FindById(id);

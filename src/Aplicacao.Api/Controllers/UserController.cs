@@ -39,10 +39,10 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> FindById(long id)
+        public async Task<ActionResult<UserViewModel>> FindById(long id)
         {
            User user = await _userService.FindByIdAsync(id).ConfigureAwait(false);
-           return Ok(_mapper.Map<UserDto>(user));
+           return Ok(_mapper.Map<UserViewModel>(user));
         }
 
         /// <summary>

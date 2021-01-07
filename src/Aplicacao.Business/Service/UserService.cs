@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Business.Services
 {
@@ -14,9 +16,9 @@ namespace Aplicacao.Business.Services
             _repository = repository;
         }
 
-        public User CreateUser(User user)
+        public async Task<User> CreateUserAsync(User user)
         {
-            User userNew = _repository.CreateUser(user);
+            User userNew = await _repository.CreateUserAsync(user);
             return userNew;
         }
 
@@ -33,15 +35,15 @@ namespace Aplicacao.Business.Services
             return list;
         }
 
-        public User FindById(long id)
-        {
-            User user = _repository.FindById(id);
-            return user;
-        }
-
         public void Delete(long id)
         {
             _repository.Delete(id);
         }
+
+        public async Task<User> FindByIdAsync(long id)
+        {
+            return await _repository.FindByIdAsync(id);
+        }
+
     }
 }

@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Business.Interfaces
 {
     public interface IUserRepository
     {
-         User CreateUser(User user);
+         Task<User> CreateUserAsync(User user);
          User EditUser(User user);
-         User FindById(long id);
+         Task<User> FindByIdAsync(long id);
          List<User> FindAll();
          void Delete(long Id);
     }
