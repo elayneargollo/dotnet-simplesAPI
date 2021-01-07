@@ -10,6 +10,9 @@ using Aplicacao.Api.Models;
 
 namespace Aplicacao.Api.Controllers
 {
+    /// <summary>
+    /// UserController
+    /// </summary>
     [ApiController]
     [Route("/api/user")]
     public class UserController : ControllerBase
@@ -17,12 +20,27 @@ namespace Aplicacao.Api.Controllers
         private IUserService _userService;
         private IMapper _mapper;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="mapper"></param>
+        
         public UserController(IUserService service, IMapper mapper)
         {
            _userService = service;
            _mapper = mapper;
         }
         
+        /// <summary>
+        /// Get user by id number
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpGet("{id}")]
         public ActionResult FindById(long id)
@@ -30,6 +48,15 @@ namespace Aplicacao.Api.Controllers
            User user = _userService.FindById(id);
            return Ok(_mapper.Map<UserDto>(user));
         }
+
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpPost]
         public IActionResult Post([FromBody]UserRequest request)
@@ -44,6 +71,15 @@ namespace Aplicacao.Api.Controllers
 
             return Ok(model);
         }
+
+        /// <summary>
+        /// User delete.
+        /// </summary>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] long id)

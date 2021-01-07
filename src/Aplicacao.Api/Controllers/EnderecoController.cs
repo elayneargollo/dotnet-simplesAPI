@@ -26,7 +26,6 @@ namespace Aplicacao.Api.Controllers
             return Ok(_enderecoService.Create(cep));
         }
     
-
         [HttpGet("{cep}")]
         public IActionResult Get([FromRoute] string cep)
         {
