@@ -20,6 +20,7 @@ using Aplicacao.Business.Services;
 using Aplicacao.Data.Repositories;
 using Aplicacao.Core.Dto;
 using Aplicacao.Core.Models;
+using Aplicacao.Api.Models;
 
 namespace Aplicacao.Api
 {
@@ -55,6 +56,10 @@ namespace Aplicacao.Api
                cfg.CreateMap<Endereco, UserEnderecoDto>();
                cfg.CreateMap<User, UserDto>();
                cfg.CreateMap<User, UserDtoEnd>();
+               cfg.CreateMap<User, UserRequest>();
+               cfg.CreateMap<UserRequest, User>();
+               cfg.CreateMap<User, UserViewModel>();
+               cfg.CreateMap<UserViewModel, User>();
 
             });
 

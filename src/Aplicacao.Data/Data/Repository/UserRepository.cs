@@ -20,7 +20,6 @@ namespace Aplicacao.Data.Repositories
         public List<User> FindAll()
         {
              return _context.users.ToList();
-        //    return _context.users.Include(end => end.Enderecos).ToList();
         }
 
         public User CreateUser(User user) 
@@ -34,6 +33,7 @@ namespace Aplicacao.Data.Repositories
         {
             User user = FindById(id);
             _context.users.Remove(user);
+            _context.SaveChanges();
         }
 
         public User FindById(long id)

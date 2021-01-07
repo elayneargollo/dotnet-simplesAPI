@@ -36,9 +36,8 @@ namespace Aplicacao.Data.Repositories
         public Endereco Create(string cep) 
         {
             Endereco endereco = ConsultaSoap.GetEnderecoByCep(cep);
-            endereco.UserForeignKey = 2;
 
-            if (endereco.UserForeignKey >= 1)
+            if (endereco.UserForeignKey >= 0)
             {
                 endereco.User = _context.users
                                 .Where(u => u.UserId == endereco.UserForeignKey)

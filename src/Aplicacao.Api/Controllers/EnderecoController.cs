@@ -19,14 +19,6 @@ namespace Aplicacao.Api.Controllers
            _enderecoService = enderecoService;
            _mapper = mapper;
         }
-
-    /*    [HttpGet]
-        public IActionResult Get()
-        {
-           return Ok(_enderecoService.FindAll());
-        }
-        */
-
     
         [HttpPost]
         public IActionResult Post(string cep)
