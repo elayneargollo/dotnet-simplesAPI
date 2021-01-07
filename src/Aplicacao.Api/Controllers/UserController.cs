@@ -41,9 +41,7 @@ namespace Aplicacao.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> FindById(long id)
         {
-           //User user = _userService.FindById(id);
-           //return Ok(_mapper.Map<UserDto>(user));
-           User user = await _userService.FindByIdAsync(id);
+           User user = await _userService.FindByIdAsync(id).ConfigureAwait(false);
            return Ok(_mapper.Map<UserDto>(user));
         }
 
@@ -57,11 +55,11 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpPost]
-        public ActionResult<UserViewModel> Post([FromBody]UserRequest request)
+        public async Task<ActionResult<UserViewModel>> Post([FromBody]UserRequest request)
         {
 
             User userMap = _mapper.Map<User>(request);
-            User userEntity = _userService.CreateUser(userMap);
+            User userEntity = await _userService.CreateUserAsync(userMap);
 
             if(userEntity == null) return NoContent();
 
@@ -80,9 +78,9 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] long id)
+        public async Task<ActionResult> Delete([FromRoute] long id)
         {
-            bool userNotFound = _userService.FindById(id) == null;
+            bool userNotFound = await _userService.FindByIdAsync(id).ConfigureAwait(false) == null;
             if(userNotFound)
             {
                 return NotFound("User not found");
