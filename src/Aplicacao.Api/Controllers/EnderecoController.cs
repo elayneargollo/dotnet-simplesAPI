@@ -18,12 +18,6 @@ namespace Aplicacao.Api.Controllers
         private IEnderecoService _enderecoService;
         private IMapper _mapper;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="service"></param>
-        /// <param name="mapper"></param>
-
         public EnderecoController (IEnderecoService enderecoService, IMapper mapper) {
            _enderecoService = enderecoService;
            _mapper = mapper;

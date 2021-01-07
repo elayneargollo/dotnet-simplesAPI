@@ -7,6 +7,8 @@ using AutoMapper;
 using System.Collections.Generic;
 using System;
 using Aplicacao.Api.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Api.Controllers
 {
@@ -20,12 +22,6 @@ namespace Aplicacao.Api.Controllers
         private IUserService _userService;
         private IMapper _mapper;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="service"></param>
-        /// <param name="mapper"></param>
-        
         public UserController(IUserService service, IMapper mapper)
         {
            _userService = service;
@@ -43,9 +39,11 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpGet("{id}")]
-        public ActionResult FindById(long id)
+        public async Task<ActionResult<UserDto>> FindById(long id)
         {
-           User user = _userService.FindById(id);
+           //User user = _userService.FindById(id);
+           //return Ok(_mapper.Map<UserDto>(user));
+           User user = await _userService.FindByIdAsync(id);
            return Ok(_mapper.Map<UserDto>(user));
         }
 
@@ -59,7 +57,7 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpPost]
-        public IActionResult Post([FromBody]UserRequest request)
+        public ActionResult<UserViewModel> Post([FromBody]UserRequest request)
         {
 
             User userMap = _mapper.Map<User>(request);
