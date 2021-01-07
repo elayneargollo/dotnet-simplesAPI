@@ -59,7 +59,7 @@ namespace Aplicacao.Api.Controllers
         {
 
             User userMap = _mapper.Map<User>(request);
-            User userEntity = await _userService.CreateUserAsync(userMap);
+            User userEntity = await _userService.CreateUserAsync(userMap).ConfigureAwait(false);
 
             if(userEntity == null) return NoContent();
 
