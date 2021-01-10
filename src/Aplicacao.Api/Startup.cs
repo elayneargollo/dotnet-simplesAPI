@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,10 +13,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
+using System.Reflection;
+using System.IO;
 using Aplicacao.Business.Interfaces;
 using Aplicacao.Business.Services;
 using Aplicacao.Data.Repositories;
+using Aplicacao.Core.Dto;
+using Aplicacao.Core.Models;
+using Aplicacao.Api.Models;
+using temis.Api.AutoMapper;
 
 namespace Aplicacao.Api
 {
@@ -40,14 +45,52 @@ namespace Aplicacao.Api
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IEnderecoService, EnderecoService>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AnyOrigin", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aplicacao.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Aplicacao.api",
+                    Version = "v1",
+                    Description = "ASP.NET 5.0",
+
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Aplicação",
+                        Email = string.Empty,
+                        Url = new Uri("https://github.com/elayneargollo/dotnet-simplesAPI.git"),
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddMaps(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            });
+            IMapper mapper = config.CreateMapper();
+
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
+            services.AddSingleton(mapper);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

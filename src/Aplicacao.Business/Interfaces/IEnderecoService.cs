@@ -7,5 +7,6 @@ namespace Aplicacao.Business.Interfaces
     {
         Endereco GetEnderecoByCep(string CEP);
         List<Endereco> FindAll();
+        Endereco Create(string cep );
     }
 }

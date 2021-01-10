@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aplicacao.Core.Models;
-using MySql.Data.MySqlClient;
 using Microsoft.EntityFrameworkCore;
 using Aplicacao.Business.Interfaces;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Data.Repositories
 {
@@ -17,35 +16,62 @@ namespace Aplicacao.Data.Repositories
             _context = contexto;
         }
 
-        public List<User> FindAll()
+        public async Task<User> CreateUserAsync(User user, string cep) 
         {
-           return _context.users.ToList();
-        }
+            List<Endereco> enderecos = new List<Endereco>();
 
-        public User CreateUser(User user) 
-        {
+            if(!isExistCEP(cep))
+            {
+                enderecos.Add(ConsultaSoap.GetEnderecoByCep(cep));
+                user.Enderecos = enderecos;
+            } 
+            else 
+            {
+                enderecos = _context.enderecos.Where(end => end.CEP == cep).ToList();
+                user.Enderecos = enderecos;
+            }
+
             _context.users.Add(user);
             _context.SaveChanges();
-            return user;
+
+            return  await Task.Run(() => FindById(user.UserId));;
         }
 
+        public async Task<User> FindByIdAsync(long id)
+        {
+            return await Task.Run(() => _context.users
+                .Where(p => p.UserId == id)
+                .Include(end => end.Enderecos)
+                .FirstOrDefault());
+        }
+
+
+        public List<User> FindAll()
+        {
+             return _context.users.ToList();
+        }
+     
         public void Delete(long id)
         {
             User user = FindById(id);
             _context.users.Remove(user);
+            _context.SaveChanges();
         }
 
         public User FindById(long id)
         {
-            User user = _context.users.Where(p => p.Id == id).FirstOrDefault();
-            _context.SaveChanges();
+            User user = _context.users
+            .Where(p => p.UserId == id)
+            .Include(end => end.Enderecos)
+            .FirstOrDefault();
+            
             return user;
         }
 
         public User EditUser(User user)
         {
             
-            User userNew = FindById(user.Id);
+            User userNew = FindById(user.UserId);
 
             if (userNew !=null)
             {
@@ -57,6 +83,11 @@ namespace Aplicacao.Data.Repositories
             }
             
             return user;
+        }
+
+        public bool isExistCEP(string cep)
+        {
+            return _context.enderecos.Where(endereco => endereco.CEP == cep).Any();
         }
 
     }
