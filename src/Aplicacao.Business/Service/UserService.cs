@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Business.Services

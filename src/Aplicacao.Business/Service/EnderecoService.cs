@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;

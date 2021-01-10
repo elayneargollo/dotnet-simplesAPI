@@ -21,6 +21,7 @@ using Aplicacao.Data.Repositories;
 using Aplicacao.Core.Dto;
 using Aplicacao.Core.Models;
 using Aplicacao.Api.Models;
+using temis.Api.AutoMapper;
 
 namespace Aplicacao.Api
 {
@@ -55,14 +56,15 @@ namespace Aplicacao.Api
             });
 
             services.AddControllers();
-            
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { 
-                    Title = "Aplicacao.api", 
-                    Version = "v1" ,
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Aplicacao.api",
+                    Version = "v1",
                     Description = "ASP.NET 5.0",
-                    
+
                     Contact = new OpenApiContact
                     {
                         Name = "Aplicação",
@@ -75,25 +77,17 @@ namespace Aplicacao.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-           var configuration = new MapperConfiguration(cfg =>
+            var config = new MapperConfiguration(cfg =>
             {
-               cfg.CreateMap<Endereco, EnderecoDto>();
-               cfg.CreateMap<Endereco, UserEnderecoDto>();
-               cfg.CreateMap<User, UserDto>();
-               cfg.CreateMap<User, UserDtoEnd>();
-               cfg.CreateMap<User, UserRequest>();
-               cfg.CreateMap<UserRequest, User>();
-               cfg.CreateMap<User, UserViewModel>();
-               cfg.CreateMap<UserViewModel, User>();
-
+                cfg.AddMaps(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
             });
+            IMapper mapper = config.CreateMapper();
 
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            var mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
         }
 

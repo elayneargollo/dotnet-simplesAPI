@@ -1,6 +1,4 @@
 using System.Text.Json.Serialization;
-using Aplicacao.Core.Dto;
-using System.Collections.Generic;
 
 namespace Aplicacao.Api.Models
 {

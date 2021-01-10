@@ -17,6 +17,11 @@ namespace Aplicacao.Api.Controllers
         private IUserService _userService;
         private IMapper _mapper;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="mapper"></param>
         public UserController(IUserService service, IMapper mapper)
         {
            _userService = service;
@@ -31,6 +36,8 @@ namespace Aplicacao.Api.Controllers
         /// <response code="204">No Content</response>
         /// <response code="400">Business logic error, see return message for more info</response>
         /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpGet("{id}")]
@@ -47,8 +54,9 @@ namespace Aplicacao.Api.Controllers
         /// <response code="204">No Content</response>
         /// <response code="400">Business logic error, see return message for more info</response>
         /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
-
         [HttpPost]
         public async Task<ActionResult<UserViewModel>> Post([FromBody]UserRequest request, string cep)
         {
@@ -70,6 +78,8 @@ namespace Aplicacao.Api.Controllers
         /// <response code="204">No Content</response>
         /// <response code="400">Business logic error, see return message for more info</response>
         /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpDelete("{id}")]
