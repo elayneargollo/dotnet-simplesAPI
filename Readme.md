@@ -16,7 +16,6 @@ Está API retorna o endereço a partir do CEP digitado.
 
 <ul>
   <li>Não há tratamento de erro.</li>
-  <li>Arquitetura pode ser melhorada .</li>
 </ul>
 
 ## Material de Apoio
