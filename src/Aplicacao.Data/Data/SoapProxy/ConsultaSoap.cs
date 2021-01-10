@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Aplicacao.Core.Models;
-using Aplicacao.Business.Interfaces;
 
 namespace Aplicacao.Data.Repositories
 {
     public class ConsultaSoap 
     {
-           
         public static Endereco GetEnderecoByCep(string cep)
         {
             Endereco endereco = new Endereco();

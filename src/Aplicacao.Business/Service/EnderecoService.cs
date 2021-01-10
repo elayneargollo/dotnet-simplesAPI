@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
@@ -23,5 +22,12 @@ namespace Aplicacao.Business.Services
             list = _repository.FindAll();
             return list;
         }
+
+        public Endereco Create(string cep )
+        {
+            Endereco newEndereco = _repository.Create(cep);
+            return newEndereco;
+        }
+
     }
 }

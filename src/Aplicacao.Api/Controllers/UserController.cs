@@ -1,52 +1,92 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
+using AutoMapper;
+using Aplicacao.Api.Models;
+using System.Threading.Tasks;
 
 namespace Aplicacao.Api.Controllers
 {
+    /// <summary>
+    /// UserController
+    /// </summary>
     [ApiController]
     [Route("/api/user")]
     public class UserController : ControllerBase
     {
         private IUserService _userService;
+        private IMapper _mapper;
 
-        public UserController(IUserService service)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="mapper"></param>
+        public UserController(IUserService service, IMapper mapper)
         {
            _userService = service;
+           _mapper = mapper;
         }
+        
+        /// <summary>
+        /// Get user by id number
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserViewModel>> FindById(long id)
         {
-            return Ok(_userService.FindAll());
+           User user = await _userService.FindByIdAsync(id).ConfigureAwait(false);
+           return Ok(_mapper.Map<UserViewModel>(user));
         }
 
-      
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
         [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        public async Task<ActionResult<UserViewModel>> Post([FromBody]UserRequest request, string cep)
         {
-            
-            User userClient = _userService.CreateUser(user);
-            if (userClient != null) return Ok(userClient);
 
-            return BadRequest("Duplicate id or could not insert this user.");
+            User userMap = _mapper.Map<User>(request);
+            User userEntity = await _userService.CreateUserAsync(userMap, cep).ConfigureAwait(false);
+
+            if(userEntity == null) return NoContent();
+
+            UserViewModel model = _mapper.Map<UserViewModel>(userEntity);
+
+            return Ok(model);
         }
 
-     
-        [HttpPut]
-        public IActionResult  Put([FromBody] User user)
-        {
-            _userService.EditUser(user);
-            return Ok(user);
-        }
+        /// <summary>
+        /// User delete.
+        /// </summary>
+        /// <response code="200">Success</response>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Business logic error, see return message for more info</response>
+        /// <response code="401">Unauthorized. Token not present, invalid or expired</response>
+        /// <response code="403">Forbidden. Resource access is denied</response>
+        /// <response code="404">Resource not found</response>
+        /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
-    
-       
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] long id)
+        public async Task<ActionResult> Delete([FromRoute] long id)
         {
-            bool userNotFound = _userService.FindById(id) == null;
+            bool userNotFound = await _userService.FindByIdAsync(id).ConfigureAwait(false) == null;
+
             if(userNotFound)
             {
                 return NotFound("User not found");
