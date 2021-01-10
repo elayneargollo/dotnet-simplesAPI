@@ -18,10 +18,13 @@ namespace Aplicacao.Data.Repositories
         public Endereco FindByCEP(string CEP)
         {
            Endereco endereco = _context.enderecos.Where(endereco => endereco.CEP == CEP).FirstOrDefault();
-           
-           User user = _context.users.First(u => u.UserId == endereco.UserForeignKey);
-           endereco.User = user;
 
+           if(_context.users.Where(u => u.UserId == endereco.UserForeignKey).Any())
+           {
+                User user = _context.users.First(u => u.UserId == endereco.UserForeignKey); 
+                endereco.User = user;
+           }
+           
            return endereco;
         }
 
@@ -35,6 +38,11 @@ namespace Aplicacao.Data.Repositories
         
         public Endereco Create(string cep) 
         {
+            if(isExist(cep))
+            {
+                return _context.enderecos.Where(endereco => endereco.CEP == cep).FirstOrDefault();
+            }
+
             Endereco endereco = ConsultaSoap.GetEnderecoByCep(cep);
 
             if (endereco.UserForeignKey >= 0)
@@ -48,6 +56,11 @@ namespace Aplicacao.Data.Repositories
             _context.SaveChanges();
 
             return endereco;
+        }
+
+        public bool isExist(string cep)
+        {
+            return _context.enderecos.Where(endereco => endereco.CEP == cep).Any();
         }
 
     }

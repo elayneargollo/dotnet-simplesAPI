@@ -16,9 +16,9 @@ namespace Aplicacao.Business.Services
             _repository = repository;
         }
 
-        public async Task<User> CreateUserAsync(User user)
+        public async Task<User> CreateUserAsync(User user, string cep)
         {
-            User userNew = await _repository.CreateUserAsync(user);
+            User userNew = await _repository.CreateUserAsync(user, cep);
             return userNew;
         }
 

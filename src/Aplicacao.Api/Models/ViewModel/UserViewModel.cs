@@ -13,7 +13,7 @@ namespace Aplicacao.Api.Models
         public int Idade { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-    //    public IEnumerable<EnderecoDto> Enderecos { get; set; }
+        public IEnumerable<EnderecoDto> Enderecos { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ namespace Aplicacao.Business.Interfaces
 {
     public interface IUserRepository
     {
-         Task<User> CreateUserAsync(User user);
+         Task<User> CreateUserAsync(User user, string cep);
          User EditUser(User user);
          Task<User> FindByIdAsync(long id);
          List<User> FindAll();

@@ -7,7 +7,6 @@ namespace Aplicacao.Data.Repositories
 {
     public class ConsultaSoap 
     {
-           
         public static Endereco GetEnderecoByCep(string cep)
         {
             Endereco endereco = new Endereco();

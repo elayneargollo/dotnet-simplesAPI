@@ -52,6 +52,12 @@ namespace Aplicacao.Api.Controllers
         public IActionResult Get([FromRoute] string cep)
         {
             Endereco endereco = _enderecoService.GetEnderecoByCep(cep);
+
+            if (endereco == null)
+            {
+                return NoContent();
+            }
+            
             return Ok(_mapper.Map<UserEnderecoDto>(endereco));
 
         }

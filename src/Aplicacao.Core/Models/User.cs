@@ -31,12 +31,12 @@ namespace Aplicacao.Core.Models
         [Display (Name = "Sobrenome")]
         public string Sobrenome { get; set; }
 
-        public ICollection<Endereco> Enderecos { get; set; }
+        public List<Endereco> Enderecos { get; set; }
 
-        public User()
+      /*  public User()
         {
             Enderecos = new HashSet<Endereco>();
-        }
+        }*/
 
     }
 }

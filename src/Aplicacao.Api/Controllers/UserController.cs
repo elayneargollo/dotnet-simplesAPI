@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
-using Aplicacao.Core.Dto;
 using AutoMapper;
-using System.Collections.Generic;
-using System;
 using Aplicacao.Api.Models;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Api.Controllers
@@ -55,11 +50,11 @@ namespace Aplicacao.Api.Controllers
         /// <response code="500">Due to server problems, it`s not possible to get your data now</response>
 
         [HttpPost]
-        public async Task<ActionResult<UserViewModel>> Post([FromBody]UserRequest request)
+        public async Task<ActionResult<UserViewModel>> Post([FromBody]UserRequest request, string cep)
         {
 
             User userMap = _mapper.Map<User>(request);
-            User userEntity = await _userService.CreateUserAsync(userMap).ConfigureAwait(false);
+            User userEntity = await _userService.CreateUserAsync(userMap, cep).ConfigureAwait(false);
 
             if(userEntity == null) return NoContent();
 
@@ -81,6 +76,7 @@ namespace Aplicacao.Api.Controllers
         public async Task<ActionResult> Delete([FromRoute] long id)
         {
             bool userNotFound = await _userService.FindByIdAsync(id).ConfigureAwait(false) == null;
+
             if(userNotFound)
             {
                 return NotFound("User not found");

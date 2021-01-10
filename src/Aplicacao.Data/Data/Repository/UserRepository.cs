@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aplicacao.Core.Models;
-using MySql.Data.MySqlClient;
 using Microsoft.EntityFrameworkCore;
 using Aplicacao.Business.Interfaces;
 using System.Threading.Tasks;
@@ -18,9 +16,21 @@ namespace Aplicacao.Data.Repositories
             _context = contexto;
         }
 
-        public async Task<User> CreateUserAsync(User user) 
+        public async Task<User> CreateUserAsync(User user, string cep) 
         {
-          
+            List<Endereco> enderecos = new List<Endereco>();
+
+            if(!isExistCEP(cep))
+            {
+                enderecos.Add(ConsultaSoap.GetEnderecoByCep(cep));
+                user.Enderecos = enderecos;
+            } 
+            else 
+            {
+                enderecos = _context.enderecos.Where(end => end.CEP == cep).ToList();
+                user.Enderecos = enderecos;
+            }
+
             _context.users.Add(user);
             _context.SaveChanges();
 
@@ -30,9 +40,9 @@ namespace Aplicacao.Data.Repositories
         public async Task<User> FindByIdAsync(long id)
         {
             return await Task.Run(() => _context.users
-            .Where(p => p.UserId == id)
-            .Include(end => end.Enderecos)
-            .FirstOrDefault());;
+                .Where(p => p.UserId == id)
+                .Include(end => end.Enderecos)
+                .FirstOrDefault());
         }
 
 
@@ -73,6 +83,11 @@ namespace Aplicacao.Data.Repositories
             }
             
             return user;
+        }
+
+        public bool isExistCEP(string cep)
+        {
+            return _context.enderecos.Where(endereco => endereco.CEP == cep).Any();
         }
 
     }

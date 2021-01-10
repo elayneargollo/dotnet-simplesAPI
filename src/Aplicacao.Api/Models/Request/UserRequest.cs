@@ -17,8 +17,6 @@ namespace Aplicacao.Api.Models
         public string Nome { get; set; }
         [JsonPropertyName("sobrenome")]
         public string Sobrenome { get; set; }
-    //    [JsonPropertyName("endereco")]
-    //    public List<EnderecoDto> Enderecos { get; set; }
 
     }
 }

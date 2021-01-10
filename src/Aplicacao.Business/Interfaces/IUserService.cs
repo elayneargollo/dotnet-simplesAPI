@@ -6,7 +6,7 @@ namespace Aplicacao.Business.Interfaces
 {
     public interface IUserService
     {
-         Task<User> CreateUserAsync(User user);
+         Task<User> CreateUserAsync(User user, string cep);
          User EditUser(User user);
          List<User> FindAll();
          Task<User> FindByIdAsync(long id);
