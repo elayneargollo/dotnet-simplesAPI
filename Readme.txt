@@ -1,41 +1,27 @@
-# Criar os projetos
+# Consumindo o WebService dos Correios (SOAP - WSDL)
 
-$ dotnet new webapi -o Aplicacao.Api
-$ dotnet new classlib -o Aplicacao.Core
-$ dotnet new classlib -o Aplicacao.Data
-$ dotnet new nunit -o Aplicacao.Tests
+WSDL é um a descrição em formato XML de um Web Service que utilizará SOAP / RPC como protocolo. É o acrônimo de Web Services Description Language (Linguagem de Descrição de Serviços Web).
+Está API retorna o endereço a partir do CEP digitado.
 
-# Criar a solution
+# Como usar 
 
-$ dotnet new sln
+<ul>
+  <li>Projeto está em localhost, portanto, realize o clone na sua máquina.</li>
+  <li>É possível que haja alguns conflitos, no terminal, digite o seguinte comando: dotnet restore.</li>
+  <li>Ainda no terminal, suba a API : dotnet run.</li>
+  <li>No navegador digite a seguinte URL: https://localhost:5001/api/endereco/?CEP=seuCEP.</li>
+</ul>
 
-# Adicionar os projetos na solution
+## Pendências
 
-$ dotnet sln add Aplicacao.Api/Aplicacao.Api.csproj
-$ dotnet sln add Aplicacao.Core/Aplicacao.Core.csproj
-$ dotnet sln add Aplicacao.Data/Aplicacao.Data.csproj
-$ dotnet sln add Aplicacao.Tests/Aplicacao.Tests.csproj
+<ul>
+  <li>Não há tratamento de erro.</li>
+  <li>Arquitetura pode ser melhorada .</li>
+</ul>
 
-# Dependências do coverlet [Coberrtura de testes]
+## Material de Apoio
 
-No módulo Aplicacao.Tests adicionar as dependências para a cobertura de código.
-
-$ dotnet add package coverlet.collector --version 1.3.0
-$ dotnet add package coverlet.msbuild --version 2.9.0
-
-No módulo Aplicacao.Api adicionar a referência para o projeto :
-
-$ dotnet add reference ../Aplicacao.Data/Aplicacao.Data.csproj
-$ dotnet add reference ../Aplicacao.Core/Aplicacao.Core.csproj
-$ dotnet add reference ../Aplicacao.Business/Aplicacao.Business.csproj
-
-No módulo Aplicacao.Business adicionar a referência para o projeto :
-
-$ dotnet add reference ../Aplicacao.Core/Aplicacao.Core.csproj
-
-No módulo Aplicacao.Data adicionar a referência para o projeto :
-
-$ dotnet add reference ../Aplicacao.Core/Aplicacao.Core.csproj
-$ dotnet add reference ../Aplicacao.Business/Aplicacao.Business.csproj
-
+##### URL : https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl
+##### Software Suporte : SoapUI 5.6.0
+##### Documentação Apoio : https://www.correios.com.br/enviar-e-receber/precisa-de-ajuda/manual_rastreamentoobjetosws.pdf
 
