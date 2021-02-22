@@ -1,33 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\elayne\\Documents\\API's\\Aplicacao\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {}
+    "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\elayne\\Documents\\API's\\Aplicacao\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {
+    "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\elayne\\Documents\\API's\\Aplicacao\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
+        "projectUniqueName": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
         "projectName": "Aplicacao.Tests",
-        "projectPath": "C:\\Users\\elayne\\Documents\\API's\\Aplicacao\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
+        "projectPath": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
         "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\elayne\\Documents\\API's\\Aplicacao\\Aplicacao.Tests\\obj\\",
+        "outputPath": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
+                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj"
+              },
+              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -43,6 +48,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.15.2, )"
             },
             "NUnit": {
               "target": "Package",
@@ -65,6 +74,114 @@
               "version": "[2.9.0, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
+        "projectName": "Aplicacao.Business",
+        "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
+        "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
+        "outputPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
+        "projectName": "Aplicacao.Core",
+        "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
+        "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
+        "outputPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",
