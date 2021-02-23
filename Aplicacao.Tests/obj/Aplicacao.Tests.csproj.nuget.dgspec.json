@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {}
+    "C:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {}
   },
   "projects": {
-    "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {
+    "C:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
+        "projectUniqueName": "C:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
         "projectName": "Aplicacao.Tests",
-        "projectPath": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
+        "projectPath": "C:\\GitHub\\soap-correios\\Aplicacao.Tests\\Aplicacao.Tests.csproj",
         "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
-        "outputPath": "c:\\GitHub\\soap-correios\\Aplicacao.Tests\\obj\\",
+        "outputPath": "C:\\GitHub\\soap-correios\\Aplicacao.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,11 +26,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
-                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj"
+              "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
+                "projectPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj"
               },
-              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
-                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
+              "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+                "projectPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
               }
             }
           }
@@ -93,14 +93,14 @@
         }
       }
     },
-    "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
+    "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
+        "projectUniqueName": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
         "projectName": "Aplicacao.Business",
-        "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
+        "projectPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\Aplicacao.Business.csproj",
         "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
-        "outputPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\obj\\",
+        "outputPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -115,8 +115,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
-                "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
+              "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+                "projectPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj"
               }
             }
           }
@@ -130,6 +130,16 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[9.5.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.5.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -149,14 +159,14 @@
         }
       }
     },
-    "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
+    "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
+        "projectUniqueName": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
         "projectName": "Aplicacao.Core",
-        "projectPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
+        "projectPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\Aplicacao.Core.csproj",
         "packagesPath": "C:\\Users\\elayne\\.nuget\\packages\\",
-        "outputPath": "c:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\obj\\",
+        "outputPath": "C:\\GitHub\\soap-correios\\src\\Aplicacao.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\elayne\\AppData\\Roaming\\NuGet\\NuGet.Config"

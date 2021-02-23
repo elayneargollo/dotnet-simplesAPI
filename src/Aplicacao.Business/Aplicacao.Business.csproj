@@ -8,5 +8,10 @@
     <ProjectReference Include="..\Aplicacao.Core\Aplicacao.Core.csproj" />
   </ItemGroup>
 
+   <ItemGroup>
+     <PackageReference Include="FluentValidation" Version="9.5.1" />
+     <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
+   </ItemGroup>
+
 
 </Project>

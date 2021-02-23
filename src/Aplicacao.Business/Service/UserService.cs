@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
 using System.Threading.Tasks;
+using Aplicacao.Business.Validations;
+using FluentValidation.Results;
+using System;
+using FluentValidation;
 
 namespace Aplicacao.Business.Services
 {
@@ -16,8 +20,20 @@ namespace Aplicacao.Business.Services
 
         public async Task<User> CreateUserAsync(User user, string cep)
         {
+
+            UserValidation userValidation = new UserValidation(user);
+            ValidationResult result = userValidation.Validate(user);
+
+            if (!result.IsValid)
+            {
+                string message = string.Format("{0}", result.Errors[0].ErrorMessage);
+                throw new ArgumentException(message);
+
+            }
+
             User userNew = await _repository.CreateUserAsync(user, cep);
             return userNew;
+
         }
 
         public User EditUser(User user)

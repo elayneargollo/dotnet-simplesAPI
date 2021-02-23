@@ -11,6 +11,7 @@ namespace temis.Api.AutoMapper.Mapper.UserMapper
         {
             if (profile != null)
                 profile.CreateMap<User, UserDto>();
+                profile.CreateMap<UserRequest, User>();
         }
 
 

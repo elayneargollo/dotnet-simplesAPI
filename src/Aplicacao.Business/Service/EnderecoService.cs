@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Aplicacao.Core.Models;
 using Aplicacao.Business.Interfaces;
+using Aplicacao.Business.Validations;
+using FluentValidation.Results;
 
 namespace Aplicacao.Business.Services
 {

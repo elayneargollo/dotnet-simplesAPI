@@ -202,3 +202,6 @@ c:\GitHub\soap-correios\Aplicacao.Tests\obj\Debug\net5.0\Aplicacao.Tests.dll
 c:\GitHub\soap-correios\Aplicacao.Tests\obj\Debug\net5.0\ref\Aplicacao.Tests.dll
 c:\GitHub\soap-correios\Aplicacao.Tests\obj\Debug\net5.0\Aplicacao.Tests.pdb
 c:\GitHub\soap-correios\Aplicacao.Tests\obj\Debug\net5.0\Aplicacao.Tests.genruntimeconfig.cache
+C:\GitHub\soap-correios\Aplicacao.Tests\bin\Debug\net5.0\FluentValidation.dll
+C:\GitHub\soap-correios\Aplicacao.Tests\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\GitHub\soap-correios\Aplicacao.Tests\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
