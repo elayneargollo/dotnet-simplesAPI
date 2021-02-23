@@ -52,8 +52,7 @@ namespace Aplicacao.Business.Services
 
         public void Delete(long id)
         {
-            var userBase = new User();
-            userBase.UserId = id;
+            var userBase = new User() {UserId = id};
 
             UserDeleteValidation userValidation = new UserDeleteValidation(id, _repository);
             ValidationResult result = userValidation.Validate(userBase);
