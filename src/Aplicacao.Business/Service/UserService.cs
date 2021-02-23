@@ -21,18 +21,21 @@ namespace Aplicacao.Business.Services
         public async Task<User> CreateUserAsync(User user, string cep)
         {
 
-            UserValidation userValidation = new UserValidation(user);
-            ValidationResult result = userValidation.Validate(user);
-
-            if (!result.IsValid)
+            try 
             {
-                string message = string.Format("{0}", result.Errors[0].ErrorMessage);
-                throw new ArgumentException(message);
+                UserValidation userValidation = new UserValidation(user);
+                ValidationResult result = userValidation.Validate(user);
+                userValidation.ValidateAndThrow(user);
+
+                User userNew = await _repository.CreateUserAsync(user, cep);
+                return userNew;
 
             }
-
-            User userNew = await _repository.CreateUserAsync(user, cep);
-            return userNew;
+            catch(ValidationException ex)
+            {
+                var messages = string.Join("; ", ex.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(string.Format("{0}", messages));
+            }
 
         }
 
