@@ -52,7 +52,23 @@ namespace Aplicacao.Business.Services
 
         public void Delete(long id)
         {
-            _repository.Delete(id);
+            var userBase = new User();
+            userBase.UserId = id;
+
+            UserDeleteValidation userValidation = new UserDeleteValidation(id, _repository);
+            ValidationResult result = userValidation.Validate(userBase);
+            userValidation.ValidateAndThrow(userBase);
+
+            try 
+            {
+                _repository.Delete(id);
+            }
+            catch(ValidationException ex)
+            {
+                var messages = string.Join("; ", ex.Errors.Select(e => e.ErrorMessage));
+                throw new ArgumentException(string.Format("{0}", messages));
+            }
+           
         }
 
         public async Task<User> FindByIdAsync(long id)

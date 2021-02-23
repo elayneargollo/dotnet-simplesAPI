@@ -85,13 +85,6 @@ namespace Aplicacao.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] long id)
         {
-            bool userNotFound = await _userService.FindByIdAsync(id).ConfigureAwait(false) == null;
-
-            if(userNotFound)
-            {
-                return NotFound("User not found");
-            }
-
             _userService.Delete(id);
             return NoContent();
         }

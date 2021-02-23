@@ -48,7 +48,7 @@ namespace Aplicacao.Data.Repositories
 
         public List<User> FindAll()
         {
-             return _context.users.ToList();
+            return _context.users.ToList();
         }
      
         public void Delete(long id)
