@@ -21,15 +21,13 @@ namespace Aplicacao.Business.Services
 
         public async Task<User> CreateUserAsync(User user, string cep)
         {
-
             try 
             {
                 UserValidation userValidation = new UserValidation(user);
                 ValidationResult result = userValidation.Validate(user);
                 userValidation.ValidateAndThrow(user);
 
-                User userNew = await _repository.CreateUserAsync(user, cep);
-                return userNew;
+                return await _repository.CreateUserAsync(user, cep);
 
             }
             catch(ValidationException ex)
@@ -37,7 +35,6 @@ namespace Aplicacao.Business.Services
                 var messages = string.Join("; ", ex.Errors.Select(e => e.ErrorMessage));
                 throw new ArgumentException(string.Format("{0}", messages));
             }
-
         }
 
         public User EditUser(User user)
