@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Aplicacao.Business.Validations;
 using FluentValidation.Results;
 using System;
-using FluentValidation;
-using System.Linq;
+using Aplicacao.Core.Exceptions.BusinessException;
 
 namespace Aplicacao.Business.Services
 {
@@ -19,22 +18,30 @@ namespace Aplicacao.Business.Services
             _repository = repository;
         }
 
-        public async Task<User> CreateUserAsync(User user, string cep)
+        public Task<User> CreateUserAsync(User user, string cep)
         {
+            Console.WriteLine("Iniciando método CreateUserAsync");
+
             try 
             {
                 UserValidation userValidation = new UserValidation(user);
-                ValidationResult result = userValidation.Validate(user);
-                userValidation.ValidateAndThrow(user);
+                FluentResultAdapter.VerificaErros(userValidation.Validate(user));
 
-                return await _repository.CreateUserAsync(user, cep);
+                _repository.CreateUserAsync(user, cep);
+                
+                return Task.FromResult(user);
 
             }
-            catch(ValidationException ex)
+            catch(BusinessException ex)
             {
-                var messages = string.Join("; ", ex.Errors.Select(e => e.ErrorMessage));
-                throw new ArgumentException(string.Format("{0}", messages));
+                Console.WriteLine(ex.Message);
+                throw new BusinessException(ex.Message);
             }
+            finally
+            {
+                Console.WriteLine("Método CreateUserAsync finalizado.");
+            }
+           
         }
 
         public User EditUser(User user)
@@ -52,20 +59,25 @@ namespace Aplicacao.Business.Services
 
         public void Delete(long id)
         {
+            Console.WriteLine("Iniciando método Delete User");
+
             var userBase = new User() {UserId = id};
 
             UserDeleteValidation userValidation = new UserDeleteValidation(id, _repository);
-            ValidationResult result = userValidation.Validate(userBase);
-            userValidation.ValidateAndThrow(userBase);
+            FluentResultAdapter.VerificaErros(userValidation.Validate(userBase));
 
             try 
             {
                 _repository.Delete(id);
             }
-            catch(ValidationException ex)
+            catch(BusinessException ex)
             {
-                var messages = string.Join("; ", ex.Errors.Select(e => e.ErrorMessage));
-                throw new ArgumentException(string.Format("{0}", messages));
+                Console.WriteLine(ex.Message);
+                throw new BusinessException(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Método Delete finalizado.");
             }
            
         }

@@ -4,6 +4,7 @@ using Aplicacao.Business.Interfaces;
 using AutoMapper;
 using Aplicacao.Api.Models;
 using System.Threading.Tasks;
+using Aplicacao.Core.Exceptions.BusinessException;
 
 namespace Aplicacao.Api.Controllers
 {
@@ -62,13 +63,8 @@ namespace Aplicacao.Api.Controllers
         {
 
             User userMap = _mapper.Map<User>(request);
-            User userEntity = await _userService.CreateUserAsync(userMap, cep).ConfigureAwait(false);
-
-            if(userEntity == null) return NoContent();
-
-            UserViewModel model = _mapper.Map<UserViewModel>(userEntity);
-
-            return Ok(model);
+            User userEntity = await _userService.CreateUserAsync(userMap, cep);
+            return Ok(_mapper.Map<UserViewModel>(userMap));
         }
 
         /// <summary>

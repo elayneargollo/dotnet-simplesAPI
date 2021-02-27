@@ -22,6 +22,9 @@ using Aplicacao.Core.Dto;
 using Aplicacao.Core.Models;
 using Aplicacao.Api.Models;
 using temis.Api.AutoMapper;
+using FluentValidation;
+using Aplicacao.Business.Validations;
+using FluentValidation.AspNetCore;
 
 namespace Aplicacao.Api
 {
@@ -89,6 +92,8 @@ namespace Aplicacao.Api
             );
 
             services.AddSingleton(mapper);
+            services.AddControllers().AddFluentValidation(mvc => mvc.RegisterValidatorsFromAssemblyContaining<Startup>());
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -4,7 +4,7 @@ using System;
 
 namespace Aplicacao.Business.Validations
 {
-    public class UserValidation : AbstractValidator<User>
+    public class UserValidation : AbstractValidator<Core.Models.User>
     {
         public UserValidation(User user)
         {
